@@ -40,6 +40,15 @@ def create_tables():
         )
     """)
 
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS sessions (
+            token_hash TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            expires_at INTEGER NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+    """)
+
     connection.commit()
     connection.close()
 
@@ -205,3 +214,17 @@ def get_user_by_email(email):
         return dict(row)
 
     return None
+
+
+def save_session(token_hash, user_id, expires_at):
+    connection = get_connection()
+    connection.execute(
+        """
+        INSERT INTO sessions (token_hash, user_id, expires_at)
+        VALUES (?, ?, ?)
+        """,
+        (token_hash, user_id, expires_at),
+    )
+
+    connection.commit()
+    connection.close()
