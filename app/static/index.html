@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Программы обучения — Feedback</title>
+  <link rel="icon" href="/static/ui/logo/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/ui/tokens.css">
+  <link rel="stylesheet" href="/static/ui/base.css">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/ui/icons.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">К содержимому</a>
+  <header class="ui-header">
+    <div class="ui-container ui-header__in">
+      <a class="ui-brand" href="#programs">
+        <svg class="ui-brand__logo" viewBox="0 0 87 31" fill="currentColor" role="img" aria-label="UWCA">
+          <path d="M14.237 0H0L7.11852 10.7926L14.237 0Z" />
+          <path d="M7.11852 22.0444V31L23.1926 4.82222H29.3926L32.1481 0H20.2074L7.11852 22.0444Z" />
+          <path
+            d="M34.2148 4.82222L36.9704 0H44.3185V9.18519L39.4963 14.237H44.3185V23.8815H18.3704L21.8148 19.0593H39.4963V14.237H28.4741L31.2296 9.87407H39.4963V4.82222H34.2148Z" />
+          <path d="M55.5704 14.237L49.6 23.8815H55.5704V14.237Z" />
+          <path d="M49.6 0V14.9259L55.5704 4.82222H66.1333L68.6593 0H49.6Z" />
+          <path fill-rule="evenodd"
+            d="M73.7111 0L71.1852 4.82222H81.2889V9.87407H67.7407L64.7556 14.237V23.8815H83.3556L86.1111 17.2222V0H73.7111ZM69.1185 19.0593V14.4667H81.2889V19.0593H69.1185Z" />
+        </svg>
+        <span class="ui-brand__sep"></span>
+        <span class="ui-brand__name">Feedback</span>
+      </a>
+      <div class="ui-header__end"><span class="workspace-label">Обучение и развитие</span><a
+          class="ui-btn ui-btn--ghost" href="/docs" target="_blank" rel="noopener">API / docs</a></div>
+    </div>
+  </header>
+  <main class="ui-container app-main" id="main">
+    <section class="summary" aria-label="Обучение в цифрах">
+      <div class="ui-card summary-item">
+        <div class="summary-label">Программы обучения<span data-icon="layers"></span></div><strong id="program-count"
+          class="ui-num">—</strong><span class="ui-faint">Доступны для создания групп</span>
+      </div>
+      <div class="ui-card summary-item">
+        <div class="summary-label">Учебные группы<span data-icon="list"></span></div><strong id="group-count"
+          class="ui-num">—</strong><span class="ui-faint">Все проведения программ</span>
+      </div>
+      <div class="ui-card summary-item">
+        <div class="summary-label">Идёт обучение<span data-icon="calendar"></span></div><strong id="active-count"
+          class="ui-num">—</strong><span class="ui-faint">По датам учебных групп</span>
+      </div>
+    </section>
+    <nav class="section-nav" aria-label="Разделы обучения"><a href="#programs" id="program-nav"
+        aria-current="page">Программы</a><a href="#groups" id="group-nav">Учебные группы</a></nav>
+    <section aria-labelledby="section-title">
+      <div class="section-title">
+        <div>
+          <h2 id="section-title">Программы обучения</h2>
+          <p class="ui-muted" id="section-description">Выберите программу, чтобы посмотреть описание и связанные группы.
+          </p>
+        </div><button class="ui-btn ui-btn--primary" id="create-button" disabled><span data-icon="plus"></span><span
+            id="create-label">Создать программу</span></button>
+      </div>
+      <div class="toolbar"><label class="search-field"><span class="ui-sr">Поиск</span><span
+            data-icon="search"></span><input class="ui-input" id="search" type="search"
+            placeholder="Название или преподаватель" autocomplete="off"></label>
+        <label id="filter-label" class="status-filter" hidden><span class="ui-sr">Статус группы</span><select
+            class="ui-select" id="status-filter">
+            <option value="all">Все статусы</option>
+            <option value="planned">Запланирована</option>
+            <option value="active">Идёт обучение</option>
+            <option value="finished">Завершена</option>
+          </select><span data-icon="chevron-down"></span></label>
+        <span class="ui-muted result-count" id="result-count" aria-live="polite"></span><button
+          class="ui-btn ui-btn--ghost" id="refresh-button"><span data-icon="refresh"></span>Обновить</button>
+      </div>
+      <div id="load-error" class="ui-note ui-note--danger" role="alert" hidden></div>
+      <div id="loading" class="loading-state" role="status"><span class="ui-spinner"></span> Загружаем программы и
+        группы…</div>
+      <div class="content-grid" id="content-grid" hidden>
+        <div class="list-column">
+          <div class="ui-table-wrap" id="table-wrap">
+            <table class="ui-table">
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <div class="ui-card" id="empty-state" hidden></div>
+          <p class="list-hint" id="list-hint">Нажмите на название, чтобы открыть карточку программы.</p>
+        </div>
+        <aside class="ui-card detail-card" id="detail" aria-label="Карточка выбранной записи" aria-busy="false"></aside>
+      </div>
+    </section>
+  </main>
+  <footer class="ui-footer">
+    <div class="ui-container ui-footer__in">
+      <svg class="ui-footer__mark" viewBox="0 0 33 31" fill="currentColor" aria-hidden="true">
+        <path d="M14.237 0H0L7.11852 10.7926L14.237 0Z" />
+        <path d="M7.11852 22.0444V31L23.1926 4.82222H29.3926L32.1481 0H20.2074L7.11852 22.0444Z" />
+      </svg>
+      <div class="ui-footer__org">
+        <div class="ui-footer__name">АО «УЗГА»</div>
+        <div class="ui-footer__dept">Отдел развития и сопровождения системы управления жизненным циклом продукции</div>
+      </div>
+      <div class="ui-footer__end">
+        <span class="ui-footer__place">Москва · 2026</span>
+      </div>
+    </div>
+  </footer>
+  <dialog class="ui-modal editor" id="editor" aria-labelledby="editor-title">
+    <div class="ui-modal__head">
+      <h2 id="editor-title">Создать программу</h2><button class="ui-btn ui-btn--ghost ui-btn--icon" type="button"
+        data-close aria-label="Закрыть"><span data-icon="x"></span></button>
+    </div>
+    <form id="editor-form">
+      <div class="ui-modal__body">
+        <p id="editor-description" class="form-description"></p>
+        <div id="form-fields" class="form-fields"></div>
+        <div id="form-error" class="ui-note ui-note--danger" role="alert" hidden></div>
+      </div>
+      <div class="ui-modal__foot"><button class="ui-btn" type="button" data-close>Отмена</button><button
+          class="ui-btn ui-btn--primary" type="submit" id="save-button">Создать программу</button></div>
+    </form>
+  </dialog>
+  <div class="notification" id="notification" role="status" aria-live="polite" hidden></div>
+</body>
+
+</html>

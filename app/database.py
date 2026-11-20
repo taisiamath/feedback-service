@@ -30,6 +30,16 @@ def create_tables():
 )
     """)
 
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            email TEXT NOT NULL UNIQUE,
+            role TEXT NOT NULL 
+                CHECK (role IN ('admin', 'teacher', 'student')),
+            password_hash TEXT
+        )
+    """)
+
     connection.commit()
     connection.close()
 
@@ -165,3 +175,33 @@ def update_group(course_id, date_start, date_end, group_id):
 
     connection.commit()
     connection.close()
+
+
+def save_user(email, role, password_hash):
+    connection = get_connection()
+
+    connection.execute(
+        """
+        INSERT INTO users (email, role, password_hash)
+        VALUES (?, ?, ?)
+        """,
+        (email, role, password_hash),
+    )
+
+    connection.commit()
+    connection.close()
+
+
+def get_user_by_email(email):
+    connection = get_connection()
+    connection.row_factory = sqlite3.Row
+
+    result = connection.execute("SELECT * FROM users WHERE email = ?", (email,))
+    row = result.fetchone()
+
+    connection.close()
+
+    if row is not None:
+        return dict(row)
+
+    return None

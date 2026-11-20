@@ -1,0 +1,131 @@
+/* UWCA UI-кит — токены. Только переменные, никаких селекторов элементов.
+   Светлая тема по умолчанию; тёмная — по prefers-color-scheme или
+   принудительно атрибутом data-theme="dark|light" — на <html> или на любом
+   блоке (тема действует внутри него).
+
+   Порядок важен: сначала базовые значения тем, потом производные токены
+   (рамки, мягкие оттенки) — они пересчитываются на каждом элементе
+   с data-theme, поэтому вложенный блок другой темы получает свои. */
+
+:root, [data-theme="light"] {
+  color-scheme: light;
+
+  /* бренд — бордовый UWCA. Это акцент, а не фон интерфейса: им красятся
+     главная кнопка, лого, фокус и выбранное состояние, остальное спокойное */
+  --brand:        #9F2131;
+  --brand-hover:  #87192a;
+  --brand-ink:    #9F2131;                  /* бренд как цвет текста/иконок */
+  --brand-on:     #ffffff;                  /* текст на бренд-заливке */
+
+  /* три слоя фона: страница → карточка → «колодец» внутри карточки */
+  --bg:    #f5f5f6;
+  --bg-2:  #ffffff;
+  --bg-3:  #f0f1f3;
+  --line:        #dfe1e5;
+  --line-soft:   #eceef1;
+  --line-strong: #c4c8cf;
+
+  /* текст в три уровня */
+  --text:   #17191d;
+  --text-2: #4b515a;
+  --text-3: #7a808a;
+
+  /* статусы. danger намеренно не бренд: ошибку не путать с фирменным акцентом */
+  --ok:      #1f7a4d;  --ok-soft:     #e7f4ec;
+  --warn:    #8a5a00;  --warn-soft:   #fdf3dc;
+  --danger:  #b3261e;  --danger-soft: #fbe9e7;
+  --info:    #2f5f9e;  --info-soft:   #e8eff9;
+
+  /* изображения данных (рендеры, листы ракурсов) всегда на белом */
+  --media-bg: #ffffff;
+
+  --brand-soft-mix: 7%;
+  --glow-1-mix: 6%;
+  --glow-2-mix: 7%;
+  --shade: 16, 18, 24;          /* rgb тени */
+  --shade-a1: .05; --shade-a2: .28; --shade-a3: .38;
+  --focus-mix: 28%;
+}
+
+/* тёмная тема — один и тот же набор дважды: по системной настройке
+   (если светлая не задана принудительно) и по data-theme="dark" */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --brand: #a62737; --brand-hover: #b93244; --brand-ink: #e0707d; --brand-on: #ffffff;
+    --bg: #0f1013; --bg-2: #16181c; --bg-3: #1d2025;
+    --line: #2a2e35; --line-soft: #20232a; --line-strong: #3a3f48;
+    --text: #e8e9ec; --text-2: #aab0b9; --text-3: #757c87;
+    --ok: #5cc493;     --ok-soft: #15291f;
+    --warn: #e0b04f;   --warn-soft: #2b2314;
+    --danger: #f0786e; --danger-soft: #2e1817;
+    --info: #8db4ea;   --info-soft: #172233;
+    --media-bg: #ffffff;
+    --brand-soft-mix: 16%; --glow-1-mix: 13%; --glow-2-mix: 10%;
+    --shade: 0, 0, 0; --shade-a1: .3; --shade-a2: .7; --shade-a3: .8;
+    --focus-mix: 45%;
+  }
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --brand: #a62737; --brand-hover: #b93244; --brand-ink: #e0707d; --brand-on: #ffffff;
+  --bg: #0f1013; --bg-2: #16181c; --bg-3: #1d2025;
+  --line: #2a2e35; --line-soft: #20232a; --line-strong: #3a3f48;
+  --text: #e8e9ec; --text-2: #aab0b9; --text-3: #757c87;
+  --ok: #5cc493;     --ok-soft: #15291f;
+  --warn: #e0b04f;   --warn-soft: #2b2314;
+  --danger: #f0786e; --danger-soft: #2e1817;
+  --info: #8db4ea;   --info-soft: #172233;
+  --media-bg: #ffffff;
+  --brand-soft-mix: 16%; --glow-1-mix: 13%; --glow-2-mix: 10%;
+  --shade: 0, 0, 0; --shade-a1: .3; --shade-a2: .7; --shade-a3: .8;
+  --focus-mix: 45%;
+}
+
+/* производные: пересчитываются там, где задана тема */
+:root, [data-theme] {
+  --brand-soft: color-mix(in srgb, var(--brand) var(--brand-soft-mix), var(--bg-2));
+  --brand-line: color-mix(in srgb, var(--brand-ink) 36%, var(--line));
+  --glow-1: color-mix(in srgb, var(--brand) var(--glow-1-mix), transparent);
+  --glow-2: color-mix(in srgb, #6b7a99 var(--glow-2-mix), transparent);
+
+  /* рамка «внутрь» — не сдвигает раскладку, мягче border */
+  --rim:        0 0 0 1px var(--line) inset;
+  --rim-strong: 0 0 0 1px var(--line-strong) inset;
+  --rim-brand:  0 0 0 1px var(--brand-line) inset;
+  --rim-danger: 0 0 0 1px var(--danger) inset;
+  --focus:      0 0 0 3px color-mix(in srgb, var(--brand-ink) var(--focus-mix), transparent);
+
+  /* тени: отрицательный spread, тень только снизу */
+  --shadow-1: 0 1px 2px rgba(var(--shade), var(--shade-a1)),
+              0 8px 22px -16px rgba(var(--shade), var(--shade-a2));
+  --shadow-2: 0 2px 4px rgba(var(--shade), var(--shade-a1)),
+              0 18px 36px -20px rgba(var(--shade), var(--shade-a3));
+  --shadow-3: 0 4px 10px rgba(var(--shade), var(--shade-a1)),
+              0 30px 60px -24px rgba(var(--shade), var(--shade-a3));
+}
+
+/* не зависят от темы */
+:root {
+  /* типографика */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs:    14.5px;
+  --fs-md: 16px;
+  --fs-lg: clamp(18px, 1.05rem + .4vw, 22px);
+  --fs-xl: clamp(22px, 1.25rem + 1vw, 32px);
+  --lh: 1.5;
+  --fw: 400; --fw-medium: 500; --fw-semi: 600;
+
+  /* отступы и радиусы */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --gutter: clamp(12px, 3.2vw, 40px);
+  --r-sm: 6px; --r: 10px; --r-lg: 14px; --r-pill: 999px;
+  --control-h: 34px;
+
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --t-fast: .16s; --t: .24s;
+}

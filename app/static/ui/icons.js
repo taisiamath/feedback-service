@@ -1,0 +1,60 @@
+/* UWCA UI-кит — набор иконок. Источник для demo.html и для копирования
+   в проекты: на странице иконка вставляется inline-SVG'ом
+     <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">…пути…</svg>
+   Цвет — currentColor, толщина и скругления — из класса .ui-icon.
+   Сетка 24×24, линия 1.7, без заливок. Новую иконку — сюда, в том же стиле. */
+window.UI_ICONS = {
+  'search':        '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
+  'image':         '<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="9.5" r="1.6"/><path d="m21 15.5-4.6-4.6L6 20"/>',
+  'camera':        '<rect x="2.5" y="6" width="19" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M8 6l1.6-2.2h4.8L16 6"/>',
+  'barcode':       '<path d="M4 5v14M7 5v14M10.5 5v14M13 5v14M17 5v14M20 5v14"/>',
+  'text':          '<path d="M4 6.5V4.5h16v2M12 4.5v15M9 19.5h6"/>',
+  'filter':        '<path d="M3.5 5h17l-6.6 8v5.5l-3.8 1.8V13z"/>',
+  'sliders':       '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+  'grid':          '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  'list':          '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r=".6"/><circle cx="4.5" cy="12" r=".6"/><circle cx="4.5" cy="18" r=".6"/>',
+  'cube':          '<path d="M12 3 20 7.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>',
+  'layers':        '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  'ruler':         '<rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M6.5 8v3M10 8v4M13.5 8v3M17 8v4"/>',
+  'weight':        '<path d="M7.5 8h9l3 12h-15z"/><circle cx="12" cy="5.5" r="2.5"/>',
+  'copy':          '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/>',
+  'download':      '<path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M4.5 19.5h15"/>',
+  'upload':        '<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4.5 19.5h15"/>',
+  'external':      '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
+  'link':          '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  'x':             '<path d="M6 6l12 12M18 6 6 18"/>',
+  'check':         '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  'plus':          '<path d="M12 5v14M5 12h14"/>',
+  'minus':         '<path d="M5 12h14"/>',
+  'chevron-down':  '<path d="m6 9 6 6 6-6"/>',
+  'chevron-up':    '<path d="m6 15 6-6 6 6"/>',
+  'chevron-left':  '<path d="m15 6-6 6 6 6"/>',
+  'chevron-right': '<path d="m9 6 6 6-6 6"/>',
+  'arrow-up':      '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  'refresh':       '<path d="M20 11a8 8 0 0 0-14.3-4.6L4 8.5"/><path d="M4 4v4.5h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.6l1.7-2.1"/><path d="M20 20v-4.5h-4.5"/>',
+  'info':          '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/>',
+  'alert':         '<path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.4v.1"/>',
+  'check-circle':  '<circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.8 2.8L16.5 9.5"/>',
+  'x-circle':      '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+  'clock':         '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  'file':          '<path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/>',
+  'folder':        '<path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4.5l2 2.5H19a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18z"/>',
+  'home':          '<path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/>',
+  'chart':         '<path d="M4 4v16h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/>',
+  'settings':      '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>',
+  'user':          '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  'sun':           '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
+  'moon':          '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+  'monitor':       '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16v4"/>',
+  'play':          '<path d="M8 5.5v13l10.5-6.5z"/>',
+  'eye':           '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+  'thumbs-up':     '<path d="M7 10.5V20H4.5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1z"/><path d="M7 10.5 10.8 3.5a2 2 0 0 1 2.7 1.9L13 9h5.3a2 2 0 0 1 2 2.4l-1.4 7A2 2 0 0 1 17 20H7"/>',
+  'thumbs-down':   '<path d="M7 13.5V4H4.5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1z"/><path d="M7 13.5 10.8 20.5a2 2 0 0 0 2.7-1.9L13 15h5.3a2 2 0 0 0 2-2.4l-1.4-7A2 2 0 0 0 17 4H7"/>',
+  'share':         '<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
+  'message':       '<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v10a1.5 1.5 0 0 1-1.5 1.5H9l-5 4z"/>',
+  'more':          '<circle cx="5.5" cy="12" r=".9"/><circle cx="12" cy="12" r=".9"/><circle cx="18.5" cy="12" r=".9"/>',
+};
+
+/* <svg> по имени — для страниц, которые собирают разметку в JS */
+window.uiIcon = (name, cls = '') =>
+  `<svg class="ui-icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${window.UI_ICONS[name] || ''}</svg>`;
